@@ -1,4 +1,5 @@
 //Jean Daly
+PImage welcomescreen;
 ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
 int w=30, h=30, snakes=20, direction = 0, foodx =15, foody = 15, speed = 8;
 int[]x_direction={0, 0, 1, -1}, y_direction={1, -1, 0, 0};
@@ -6,9 +7,12 @@ boolean gameover=false;
 
 
 void setup() {
-  size(600, 600);
+ welcomescreen= loadImage("background.png");
+  game = 10;
   x.add(0);
   y.add(15);
+  //image(welcomescreen, 0 , 0);
+  size(600, 600);
 }
 void draw() {
   background(0); // back color
@@ -41,10 +45,11 @@ void draw() {
       }
     }
   } else {
-    fill(219, 20, 20);
-    textSize(45);
-    textAlign(CENTER);
-    text("GAME OVER \n Your Score is: "+ x.size() +"\n Press ENTER", width/2, height/3);
+    fill(255);
+    imageMode(CENTER);
+    image(welcomescreen, width/2, height/2);
+
+    text("High Score: "+ x.size() , 20, 50);
     if (keyCode == ENTER) {
       x.clear();
       y.clear();
@@ -56,7 +61,6 @@ void draw() {
     }
   }
 }
-
 void keyPressed() {
   int newdir=keyCode == DOWN? 0:(keyCode== UP?1:(keyCode == RIGHT?2:(keyCode == LEFT?3:-1)));
   if (newdir !=-1) direction = newdir;
